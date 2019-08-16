@@ -8,13 +8,15 @@ dotenv.config({ path: ".env" });
 
 //config files
 const keys = require("./config/keys");
+const database = require("./config/database");
 
 
 // initialize express
 const app = express();
 
 
-
+// connect to database
+database.connect();
 
 
 
