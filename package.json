@@ -1,0 +1,11 @@
+{
+  "name": "trivago_rooms",
+  "version": "1.0.0",
+  "description": "A back-end for trivago room reservation servces",
+  "main": "server.js",
+  "scripts": {
+    "test": "\t"
+  },
+  "author": "Kolade Agbele",
+  "license": "ISC"
+}
