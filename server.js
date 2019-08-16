@@ -19,8 +19,6 @@ const app = express();
 database.connect();
 
 
-
-
 const port = keys.port;
 
 app.listen(port, () => console.log(`server running on ${keys.host}:${port}`));
