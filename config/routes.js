@@ -2,9 +2,9 @@ const express = require("express");
 const app = express();
 
 
-app.use("/", (req, res) => {
-  console.log("Welcome to this app");
-});
+const userRouter = require("../components/User/userRouter");
+
+app.use("/user", userRouter);
 
 
 module.exports = app;

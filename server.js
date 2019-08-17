@@ -1,5 +1,5 @@
-const dotenv = require("dotenv");
-const express = require("express");
+const dotenv    = require("dotenv");
+const express   = require("express");
 
 
 // configure variable.env
@@ -7,16 +7,21 @@ dotenv.config({ path: ".env" });
 
 
 //config files
-const keys = require("./config/keys");
+const keys     = require("./config/keys");
 const database = require("./config/database");
+const routes   = require("./config/routes");
 
 
 // initialize express
 const app = express();
 
-
 // connect to database
 database.connect();
+
+
+// Connect to routes
+app.use("/", routes);
+
 
 
 const port = keys.port;
