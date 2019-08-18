@@ -1,5 +1,6 @@
 const dotenv    = require("dotenv");
 const express   = require("express");
+const passport  = require('passport');
 
 
 // configure variable.env
@@ -15,13 +16,19 @@ const routes   = require("./config/routes");
 // initialize express
 const app = express();
 
+
 // connect to database
 database.connect();
+
+// Passport middleware
+app.use(passport.initialize());
+
+// Passport Middleware
+require("./config/passport")(passport);
 
 
 // Connect to routes
 app.use("/", routes);
-
 
 
 const port = keys.port;
