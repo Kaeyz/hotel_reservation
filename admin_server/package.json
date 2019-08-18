@@ -1,0 +1,11 @@
+{
+  "name": "admin_server",
+  "version": "1.0.0",
+  "description": "servr side fro admin",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kolade Agbeele (Kaeyz)",
+  "license": "ISC"
+}
