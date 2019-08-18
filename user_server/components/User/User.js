@@ -6,27 +6,17 @@ const UserSchema = new Schema({
 	username: {
 		type: String,
 		unique: true,
-		required: "Please supply a username",
-		trim: true
-	},
-	name: {
-		type: String,
-		unique: true,
 		lowercase: true,
 		trim: true,
-		required: "Please supply an email address"
+		required: "Username is required"
 	},
-	password: {
-		type: String,
-		required: true
-	},
-	createdAt: {
-		type: Date,
-		default: Date.now
+	points: {
+		type: Number,
+		required: true,
+		default: 250
 	},
 	role: {
 		type: String,
-		enum: ["USER", "ADMIN"],
 		required: "Account type not specified",
 		default: "USER"
 	}

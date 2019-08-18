@@ -11,13 +11,13 @@ opts.secretOrKey = keys.secretOrKey;
 module.exports = passport => {
 	passport.use(new JWTStrategy(opts, (jwt_payload, done) => {
 		userRepository
-			.findAccountById(jwt_payload.id)
-			.then(account => {
-				if (account) {
-					return done(null, account);
+			.findUserById(jwt_payload.id)
+			.then(user => {
+				if (user) {
+					return done(null, user);
 				}
 				return done(null, false);
 			})
-			.catch(err => console.log(err));
+			.catch(err => console.error(err));
 	}));
 };
