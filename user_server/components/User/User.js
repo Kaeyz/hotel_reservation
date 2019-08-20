@@ -18,6 +18,7 @@ const UserSchema = new Schema({
 	role: {
 		type: String,
 		required: "Account type not specified",
+		enum: ["USER", "ADMIN"],
 		default: "USER"
 	}
 });
