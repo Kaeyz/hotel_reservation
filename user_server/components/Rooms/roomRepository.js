@@ -67,4 +67,4 @@ roomRepository.findRoomByName = (name) => {
 };
 
 
-module.exports = userRepository;
+module.exports = roomRepository;
