@@ -100,13 +100,12 @@ userController.loginUser = (req, res) => {
     .findUserByUsername(req.body.username)
     .then(user => {
       if (!user) {
-        errors.username =
-        errors.email = `Oops!! ${req.body.username} does not exist. Try again`;
+        errors.username = `Oops!! ${req.body.username} does not exist. Try again`;
         return res.status(404).json(errors);
       }
       // create JWT payload
       const payload = {
-        id: user.id,
+        id: user._id,
         username: user.username,
         points: user.points,
         role: user.role
@@ -122,6 +121,16 @@ userController.loginUser = (req, res) => {
     })
     .catch(err => res.status(503).json(err));
 };
+
+/**
+ * @description update user point
+ * @requires username,admin,newPoints
+ * @returns returns new user with updated points
+ */
+userController.updateUserPoint = (req, res) => {
+  
+}
+
 
 
 

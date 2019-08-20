@@ -13,6 +13,7 @@ const createRoomValidator = require("../validations/createRoom");
  * @returns new user created
  */
 roomController.createRoom = (req, res) => {
+  console.log(req.user);
   // 1. Validate form input
   const { errors, isValid } = createRoomValidator(req.body);
 	if (!isValid) {
