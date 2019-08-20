@@ -4,6 +4,7 @@ const userController = {};
 
 // Input Validations
 const createUserValidator = require("../validations/createUser");
+const updatePointValidator = require("../validations/updatePoint");
 const tokenGenerator = require("../validations/token");
 
 
@@ -113,8 +114,7 @@ userController.loginUser = (req, res) => {
       tokenGenerator
         .loginToken(payload)
         .then(token => {
-          const success = {};
-          success.msg = "Login success";
+          const success = {msg: "Login success"};
           res.status(200).json(token, success, user);
         })
         .catch(err => res.status(503).json(err));
@@ -127,8 +127,28 @@ userController.loginUser = (req, res) => {
  * @requires username,admin,newPoints
  * @returns returns new user with updated points
  */
-userController.updateUserPoint = (req, res) => {
-  
+userController.updatePoint = (req, res) => {
+    // 1. Validate form input
+    const { errors, isValid } = updatePointValidator(req.body);
+    if (!isValid) {
+      return res.status(400).json(errors);
+    };
+
+
+  // find user with user name
+  userRepository
+    .findUserByUsername(req.body.username)
+    .then(user => {
+      // update user points from
+      userRepository
+        .updateUserPoints(user, req.body.points)
+        .then(() => {
+          const success = {msg: "points updated successfully"};
+          res.status(200).json(success);
+        })
+        .catch(err => res.status(503).json(err));
+    })
+    .catch(err => res.status(503).json(err));
 }
 
 

@@ -65,6 +65,22 @@ userRepository.createAdmin = (userOptions) => {
 	});
 };
 
+/**
+ * @description updates user point and saves it to the database
+ * @requires user, required_points
+ * @returns user with updated required_points
+ */
+
+userRepository.updateUserPoints = (user, points) => {
+	return new Promise((resolve) => {
+		user.points = points;
+		user.save()
+			.then(user => {
+				return resolve(user);
+			});
+	});
+};
+
 
 
 

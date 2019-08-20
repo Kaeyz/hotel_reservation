@@ -14,9 +14,9 @@ const userController = require("./userController");
 router.post("/create", userController.createUserAccount);
 router.post("/login", userController.loginUser);
 router.post("/admin-create", userController.createAdminAccount);
-router.post("/points/update",
+router.post("/point/update",
   passport.authenticate("jwt", { session: false }),
   authorize.isAdmin,
-  userController.updatePoints);
+  userController.updatePoint);
 
 module.exports = router;
