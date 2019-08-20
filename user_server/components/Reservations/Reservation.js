@@ -34,7 +34,7 @@ function autoPopulate(next) {
 	next();
 }
 
-UserProfileSchema.pre("find", autoPopulate);
-UserProfileSchema.pre("findOne", autoPopulate);
+ReservationSchema.pre("find", autoPopulate);
+ReservationSchema.pre("findOne", autoPopulate);
 
 module.exports = mongoose.model("reservations", ReservationSchema);
