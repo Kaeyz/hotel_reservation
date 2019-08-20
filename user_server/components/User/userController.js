@@ -14,14 +14,14 @@ const tokenGenerator = require("../validations/token");
  */
 userController.createUserAccount = (req, res) => {
   // 1. Validate form input
-	const { errors, isValid } = createUserValidator(req.body);
+  const { errors, isValid } = createUserValidator(req.body);
 	if (!isValid) {
 		return res.status(400).json(errors);
   };
 
   // check if user exist
   userRepository
-    .findAccountByUsername(req.body.username)
+    .findUserByUsername(req.body.username)
     .then(user => {
       if (user) {
         errors.username = `Oops!! ${req.body.username} already taken. Try again`;
@@ -32,6 +32,43 @@ userController.createUserAccount = (req, res) => {
           .createUser(req.body)
           .then(newUser => {
             const success = `Congratulations ${newUser.username}!! Your account has been registered successfully. Login to your account`;
+            return res.status(200).json({ msg: success });
+          })
+          .catch(err => {
+            return res.status(503).json(err);
+          })
+      }
+    })
+    .catch(err => {
+      return res.status(503).json(err);
+    });
+}
+
+/**
+ * @description sets up a new admin account
+ * @requires form_input
+ * @returns new admin created
+ */
+userController.createAdminAccount = (req, res) => {
+  // 1. Validate form input
+	const { errors, isValid } = createUserValidator(req.body);
+	if (!isValid) {
+		return res.status(400).json(errors);
+  };
+
+  // check if user exist
+  userRepository
+    .findUserByUsername(req.body.username)
+    .then(admin => {
+      if (admin) {
+        errors.username = `Oops!! ${req.body.username} already taken. Try again`;
+        return res.status(400).json(errors);
+      } else {
+        // create user
+        userRepository
+          .createAdmin(req.body)
+          .then(newAdmin => {
+            const success = `Congratulations ${newAdmin.username}!! Your account has been registered successfully. Login to your account`;
             return res.status(200).json({ msg: success });
           })
           .catch(err => {
@@ -60,7 +97,7 @@ userController.loginUser = (req, res) => {
   }
 
   userRepository
-    .findAccountByUsername(req.body.username)
+    .findUserByUsername(req.body.username)
     .then(user => {
       if (!user) {
         errors.username =

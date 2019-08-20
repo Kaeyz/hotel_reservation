@@ -37,9 +37,35 @@ userRepository.createUser = (userOptions) => {
 			role: "USER",
 			points: 250
 		});
-		return resolve(newUser);
+		newUser
+			.save()
+			.then(newUser => {
+				return resolve(newUser);
+		})
 	});
 };
+
+/**
+ * @description creates a new instance of an admin and saves it to the database
+ * @requires admin_Details
+ * @returns New admin created
+ */
+userRepository.createAdmin = (userOptions) => {
+	return new Promise((resolve) => {
+		const newUser = new User({
+			username: userOptions.username,
+			role: "ADMIN",
+			points: 10000
+		});
+		newUser
+			.save()
+			.then(newUser => {
+				return resolve(newUser);
+		})
+	});
+};
+
+
 
 
 /**
@@ -47,7 +73,7 @@ userRepository.createUser = (userOptions) => {
  * @requires Account_Username
  * @returns Returns user matching the account username
  */
-userRepository.findAccountByUsername = (username) => {
+userRepository.findUserByUsername = (username) => {
 	return new Promise((resolve, reject) => {
 		User
 			.findOne({

@@ -1,10 +1,12 @@
-const dotenv    = require("dotenv");
-const express   = require("express");
-const passport  = require('passport');
+const dotenv      = require("dotenv");
+const express     = require("express");
+const passport    = require('passport');
+const bodyParser  = require("body-parser");
 
 
 // configure variable.env
 dotenv.config({ path: ".env" });
+
 
 
 //config files
@@ -19,6 +21,10 @@ const app = express();
 
 // connect to database
 database.connect();
+
+// body parser config
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // Passport middleware
 app.use(passport.initialize());
