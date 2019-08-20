@@ -15,7 +15,7 @@ const RoomSchema = new Schema({
 		required: true,
 		default: 1
   },
-  requiredPoints: {
+  required_points: {
 		type: Number,
 		required: true,
 		default: 250
