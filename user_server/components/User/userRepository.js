@@ -89,7 +89,6 @@ userRepository.updateUserPoints = (user, points) => {
 
 userRepository.updateUserPointsAfterReservation = (user, required_points) => {
 	return new Promise((resolve) => {
-		console.log(user)
 		user.points -= required_points;
 		user
 			.save()

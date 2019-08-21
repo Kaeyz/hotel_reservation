@@ -71,17 +71,14 @@ roomRepository.findRoomByName = (name) => {
  * @requires room
  * @returns Returns room
  */
-roomRepository.updateAvailableRoomsAfterReservation = (room, amount) => {
+roomRepository.updateAvailableRoomsAfterReservation = (room) => {
 	return new Promise((resolve, reject) => {
-		room.available_amount -= amount;
-		room
-			.save()
+		roomRepository.findRoomByName(room.name)
 			.then(room => {
-				return resolve(room);
-			})
-			.catch(err => {
-				return reject(err);
-			});
+				room.available_amount--;
+				room.save()
+					.then(room => resolve(room))
+			}).catch(err => reject(err));
 	});
 };
 
