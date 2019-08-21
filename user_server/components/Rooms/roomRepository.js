@@ -66,5 +66,24 @@ roomRepository.findRoomByName = (name) => {
 	});
 };
 
+/**
+ * @description Updates available amount of rooms
+ * @requires room
+ * @returns Returns room
+ */
+roomRepository.updateAvailableRoomsAfterReservation = (room, amount) => {
+	return new Promise((resolve, reject) => {
+		room.available_amount -= amount;
+		room
+			.save()
+			.then(room => {
+				return resolve(room);
+			})
+			.catch(err => {
+				return reject(err);
+			});
+	});
+};
+
 
 module.exports = roomRepository;

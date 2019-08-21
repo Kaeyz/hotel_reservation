@@ -23,4 +23,11 @@ const UserSchema = new Schema({
 	}
 });
 
+UserSchema.virtual("reservations", {
+	ref: "reservations",
+	localField: "_id",
+	foreignField: "user"
+});
+
+
 module.exports = mongoose.model("users", UserSchema);
