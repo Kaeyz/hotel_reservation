@@ -10,7 +10,7 @@ const authorize = require("../authorizations");
 // Import controller
 const userController = require("./userController");
 
-
+router.get("/return-admin", userController.fetchAdmin);
 router.post("/create", userController.createUserAccount);
 router.post("/login", userController.loginUser);
 router.post("/admin-create", userController.createAdminAccount);

@@ -137,5 +137,18 @@ userRepository.findUserByUsername = (username) => {
 	});
 };
 
+/**
+ * @description returns application admin on request
+ * @params admin username
+ * @returns user with role admin
+ */
+userRepository.returnAdmin = (username) => {
+	return new Promise((resolve) => {
+		userRepository
+			.findUserByUsername(username)
+			.then(admin => resolve(admin));
+	});
+};
+
 
 module.exports = userRepository;

@@ -1,5 +1,6 @@
 const userRepository = require("./userRepository");
 const userController = {};
+const keys = require("../../config/keys");
 
 
 // Input Validations
@@ -151,8 +152,17 @@ userController.updatePoint = (req, res) => {
     .catch(err => res.status(503).json(err));
 }
 
-
-
+/**
+ * @description app admin controller
+ * @returns returns new user with role ADMIN
+ */
+userController.fetchAdmin = (req, res) => {
+  userRepository
+    .returnAdmin(keys.admin_username)
+    .then(admin => {
+      return res.send(admin);
+    });
+}
 
 
 

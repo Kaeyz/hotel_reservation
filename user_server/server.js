@@ -41,3 +41,5 @@ app.use("/", routes);
 const port = keys.port;
 
 app.listen(port, () => console.log(`server running on port ${port}`));
+
+module.exports = app;
