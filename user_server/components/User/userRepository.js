@@ -66,6 +66,25 @@ userRepository.createAdmin = (userOptions) => {
 };
 
 /**
+ * @description makes sure application has an admin on startup
+ * @returns admin
+ */
+userRepository.addAdminToDB = () => {
+	return new Promise((resolve) => {
+		userRepository
+			.findUserByUsername("admin")
+			.then(admin => {
+				if (!admin) {
+					const admin = { username: "admin" };
+					userRepository.createAdmin(admin)
+						.then(admin => resolve(admin))
+				}
+				return resolve(admin)
+			});
+	});
+};
+
+/**
  * @description updates user point and saves it to the database
  * @requires user,required_points
  * @returns user with updated required_points
@@ -97,9 +116,6 @@ userRepository.updateUserPointsAfterReservation = (user, required_points) => {
 			});
 	});
 };
-
-
-
 
 /**
  * @description Finds a specific account from the database using account Username

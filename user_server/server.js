@@ -22,6 +22,7 @@ const app = express();
 // connect to database
 database.connect();
 
+
 // body parser config
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -39,4 +40,4 @@ app.use("/", routes);
 
 const port = keys.port;
 
-app.listen(port, () => console.log(`server running on ${keys.host}:${port}`));
+app.listen(port, () => console.log(`server running on port ${port}`));

@@ -1,0 +1,25 @@
+version: "3"
+services:
+  mongo:
+    container_name: mongo
+    image: mongo
+    ports:
+      - "27017:27017"
+  app:
+    container_name: user_server
+    restart: always
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./user_server
+    links:
+      - mongo
+    volumes:
+      - /app/node_modules
+      - ./user_server:/app
+    environment:
+      - PORT=5000
+      - mongoURI=mongodb://mongo:27017/trivago_db
+      - secretOrKey=this_is_a_super_secret
+      - ADMIN_USERNAME=admin
+    ports:
+      - '5000:5000'
