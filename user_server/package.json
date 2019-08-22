@@ -4,7 +4,8 @@
   "description": "A back-end for trivago room reservation servces",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "start": "node server.js"
   },
   "author": "Kolade Agbele (Kaeyz)",
   "license": "ISC",
