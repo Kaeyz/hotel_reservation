@@ -8,24 +8,20 @@ const User = require("../../../components/User/User");
 
 
 describe("User model test", () => {
-  before(() => {
-    setTimeout(async (done) => {
-      await database.connect();
-      User.remove({});
+  before((done) => {
+      database.connect();
+      User.deleteMany({});
       done();
-    }, 5000);
   });
 
   afterEach(done => {
-    User.remove({});
+    User.deleteMany({});
     done();
   });
 
-  after(() => {
-    setTimeout(async (done) => {
-      await database.delete();
+  after((done) => {
+      database.delete();
       done();
-    }, 5000)
   });
 
   it("has a module", (done) => {
@@ -33,48 +29,39 @@ describe("User model test", () => {
     done();
   });
 
-  describe("get user", (done) => {
+  describe("get user", () => {
 
-    it("saves a user with given parameters", () => {
-      setTimeout(async () => {
+    it("saves a user with given parameters", async () => {
         const user = new User({ username: "foo", role: "USER", points: 200 });
         await user.save();
         const findUser = await User.findOne({ username: "foo" });
         expect(findUser.username).to.equal("foo");
         expect(findUser.role).to.equal("USER");
         expect(findUser.points).to.equal(200);
-        done();
-      }, 5000);
     })
 
-    it("saves a user with default parameters", () => {
-      setTimeout(async () => {
+    it("saves a user with default parameters", async () => {
         const user = new User({ username: "fooo" });
         await user.save();
         const findUser = await User.findOne({ username: "fooo" })
         expect(findUser.username).to.equal("fooo")
         expect(findUser.role).to.equal("USER");
         expect(findUser.points).to.equal(250);
-        done();
       });
     });
   });
 
-  describe("update user", (done) => {
+  describe("update user", () => {
 
-    it("updates a user with given parameters", () => {
-      setTimeout(async () => {
+    it("updates a user with given parameters", async () => {
         let user = new User({ username: "foo", role: "USER", points: 200 });
         user = await user.save();
-        user.name = "foo";
+        user.username = "fooo";
         user.role = "ADMIN";
         await user.save();
         const findUser = await User.findOne({ username: "fooo" });
         expect(findUser.username).to.equal("fooo");
         expect(findUser.role).to.equal("ADMIN");
         expect(findUser.points).to.equal(200);
-        done();
-      }, 5000);
-    });
   });
 })

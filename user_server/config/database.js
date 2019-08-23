@@ -34,7 +34,7 @@ database.disconnect = () => {
 }
 
 database.delete = () => {
-	return mongoose.connection.db.dropDatabase();
+	return mongoose.connection.db.dropDatabase().then(() => console.log("database deleted"));
 };
 
 

@@ -6,16 +6,17 @@ const request = require('supertest');
 const app = require("../server");
 const database = require("../config/database");
 
-(async function () {
-  await database.connect();
-}());
+
 
 describe("App is starting up properly", async () => {
-  after(() => {
-    setTimeout(async (done) => {
-      await database.delete();
+  before((done) => {
+    database.connect();
+    done();
+  });
+  
+  after((done) => {
+      database.delete();
       done();
-    }, 5000);
   });
 
   it("has a module", (done) => {
