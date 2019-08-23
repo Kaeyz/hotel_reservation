@@ -69,13 +69,13 @@ userRepository.createAdmin = (userOptions) => {
  * @description makes sure application has an admin on startup
  * @returns admin
  */
-userRepository.addAdminToDB = () => {
+userRepository.addAdminToDB = (adminUsername) => {
 	return new Promise((resolve) => {
 		userRepository
-			.findUserByUsername("admin")
+			.findUserByUsername(adminUsername)
 			.then(admin => {
 				if (!admin) {
-					const admin = { username: "admin" };
+					const admin = { username:  adminUsername};
 					userRepository.createAdmin(admin)
 						.then(admin => resolve(admin))
 				}

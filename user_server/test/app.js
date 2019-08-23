@@ -8,7 +8,7 @@ const database = require("../config/database");
 
 (async function () {
   await database.connect();
-}())
+}());
 
 describe("App is starting up properly", async () => {
   after(() => {

@@ -1,15 +1,12 @@
 const mongoose = require("mongoose");
 
 const userRepository = require("../components/User/userRepository");
+const {mongoURI,mongoURI_Test, admin_username } = require("./keys");
 
 let db;
 
-if (process.env.NODE_ENV === "test") {
-
-	db = require("./keys").mongoURI_Test;
-} else {
-	db = require("./keys").mongoURI
-}
+process.env.NODE_ENV === "test" ?
+	db = mongoURI_Test : db = mongoURI
 
 const database = {};
 
@@ -19,7 +16,7 @@ database.connect = () => {
 		.connect(db, { useNewUrlParser: true, useCreateIndex: true })
 			.then(() => {
 			userRepository
-				.addAdminToDB()
+				.addAdminToDB(admin_username)
 				.then((res) => {
 					console.log("Connected to Database Successfully");
 					resolve(res);
