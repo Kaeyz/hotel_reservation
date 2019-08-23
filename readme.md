@@ -1,7 +1,9 @@
 This a project is my solution to trivago code test for Nodejs backend developer.
 
 Language: JavaScript
+
 Stack : NODEJS, Express, Mongodb, Docker.
+
 Test: Mocha, supertest, Chai.
 
 Features added
