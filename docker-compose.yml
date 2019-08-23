@@ -5,6 +5,14 @@ services:
     image: mongo
     ports:
       - "27017:27017"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.75'
+          memory: 750M
+        reservations:
+          cpus: '0.25'
+          memory: 250M
   app:
     container_name: user_server
     restart: always
@@ -23,3 +31,11 @@ services:
       - ADMIN_USERNAME=admin
     ports:
       - '5000:5000'
+    deploy:
+      resources:
+        limits:
+          cpus: '0.75'
+          memory: 750M
+        reservations:
+          cpus: '0.25'
+          memory: 250M

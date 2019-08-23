@@ -160,7 +160,7 @@ userController.fetchAdmin = (req, res) => {
   userRepository
     .returnAdmin(keys.admin_username)
     .then(admin => {
-      return res.send(admin);
+      return res.status(200).json(admin);
     });
 }
 

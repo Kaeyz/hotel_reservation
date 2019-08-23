@@ -5,6 +5,7 @@ const userRepository = require("../components/User/userRepository");
 let db;
 
 if (process.env.NODE_ENV === "test") {
+
 	db = require("./keys").mongoURI_Test;
 } else {
 	db = require("./keys").mongoURI
@@ -16,17 +17,17 @@ database.connect = () => {
 	return new Promise((resolve, reject) => {
 		mongoose
 		.connect(db, { useNewUrlParser: true, useCreateIndex: true })
-		.then(() => {
+			.then(() => {
 			userRepository
 				.addAdminToDB()
-				.then(() => {
+				.then((res) => {
 					console.log("Connected to Database Successfully");
-					resolve();
+					resolve(res);
 				});
 		})
 		.catch(err => {
 			console.log({ "dbErr": err });
-			reject;
+			reject(err);
 		});
 	});
 };
@@ -35,8 +36,8 @@ database.disconnect = () => {
 	return mongoose.disconnect();
 }
 
-database.delete = (database) => {
-	return database.connection.db.dropDatabase();
+database.delete = () => {
+	return mongoose.connection.db.dropDatabase();
 };
 
 
