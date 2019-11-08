@@ -1,4 +1,4 @@
-This a project is my solution to trivago code test for Nodejs backend developer.
+Room reservation microservice.
 
 Language: JavaScript
 
